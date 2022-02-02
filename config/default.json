@@ -1,0 +1,5 @@
+{
+    "port": 5000,
+    "jwtSecret": "zaymax",
+    "mongoUrl": "mongodb+srv://Zaymax:Vvfrcqwer0@cluster0.woc9a.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+}
