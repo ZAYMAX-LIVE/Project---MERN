@@ -1,11 +1,10 @@
 const {Router} = require('express')
 const router = Router()
-const User = require('./models/User')
 const bcrypt = require('bcryptjs')
 const config = require('config')
 //const {check, validationResult} = require('express-validator')
 const jwt = require('jsonwebtoken')
-const user = require('../models/user')
+const User = require('../models/User')
 
 
 //auth/register
@@ -30,8 +29,8 @@ router.post('/register', async (req, res)=>{
 router.post('/login', async (req, res)=>{
     try{
         const {name, password} = req.body
-        const candidate = await User.findOne({name})
-        if(!candidate){
+        const user = await User.findOne({name})
+        if(!user){
             return res.status(400).json({message: 'User no account'})
         }
         const isPassword = await bcrypt.compare(password, user.password)
@@ -43,10 +42,10 @@ router.post('/login', async (req, res)=>{
             config.get('jwtSecret'),
             {expiresIn: '1h'} //на сколько времени даеться токен
         )
-        res.json({token, userId: user.id})
+        return res.json({token, userId: user.id})
     }
     catch{
-        res.status(500).json({message: "No no no..."})
+        return res.status(500).json({message: "No no no..."})
     }
 })
 
