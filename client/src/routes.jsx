@@ -5,14 +5,13 @@ import CreatePage from './pages/CreatePage'
 import DetailPage from './pages/DetailPage'
 import AuthPage from './pages/AuthPage'
 
-
 export const useRoutes = isAuthenticated => {
 
         if(isAuthenticated){ 
             return(
                 <Routes>
                    <Route exact path="/links" element={<LinksPage/>}/>
-                   <Route exact path="/" element={<CreatePage/>}/>
+                   <Route exact path="*" element={<CreatePage/>}/>
                    <Route path="/detail/:id" element={<DetailPage/>}/>
                 </Routes>
             )
